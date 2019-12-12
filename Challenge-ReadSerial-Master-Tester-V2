@@ -1,0 +1,44 @@
+
+      //============================//
+     //                            //
+    // 2019 Ninja Challenge Intel //
+   //  Read Serial, Read!        //
+  // Code Written By: Omri Raz  //
+ //                            //
+//============================//
+
+//THIS CODE IS FOR THE MASTER (SENDING) ARDUINO
+
+bool win;
+#include <SoftwareSerial.h>
+SoftwareSerial MASTER(2,3);
+String SecretCode = "test";
+String input;
+void setup() {
+  Serial.begin(9600);
+  MASTER.begin(1200);
+
+}
+
+void loop() {
+  
+  MASTER.print(SecretCode);
+ 
+  if(Serial.available()){
+     //String input = Serial.readString();
+     String s = Serial.readStringUntil('\n');
+     Serial.println(s);
+     
+     delay(100);
+     s.trim();
+     Serial.println(s);
+     if (s == SecretCode) {
+      Serial.println("True");
+      //================ADD WIN FUNCTION HERE=============//
+     }
+     else {
+      Serial.println("False");
+     }
+  }
+}
+
